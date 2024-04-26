@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hola</h1>
+
+    <form action="verificar.php" method="post">
+      <input type="text" name="nombre" placeholder="nombre" />
+      <input type="text" name="contraseña" placeholder="contraseña" />
+      <input type="text" name="email" placeholder="email" />
+      <button>Enviar</button>
+    </form>
+
+    <button class="click">Imprimir</button>
+    <div class="impresion"></div>
+
+    <script>
+      const impri = document.querySelector(".impresion");
+      const boton = document.querySelector(".click");
+
+      // boton.onclick = async ()=>{
+      //     const response = await fetch('http://localhost/primerphp/imprimir.php', {method: "post",body: JSON.stringify()});
+      //     const data = await response.json();
+      //     data.forEach(element => {
+      //         impri.innerHTML+= "<h1>"+element+"</h1>";
+      //     });
+      // }
+
+      boton.onclick = async () => {
+        const response = await fetch(
+          "http://localhost/primerphp/verificar.php",
+          {
+            method: "post",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+              nombre: "juan",
+              contraseña: "1",
+              email: "hola",
+            }),
+          }
+        );
+        const data = await response.text();
+        console.log(data);
+      };
+    </script>
+  </body>
+</html>
